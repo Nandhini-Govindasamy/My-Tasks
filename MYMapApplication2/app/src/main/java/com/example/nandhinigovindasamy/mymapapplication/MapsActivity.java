@@ -48,12 +48,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     GoogleApiClient mGoogleApiClient;
     Location mLastLocation;
     Marker mCurrLocationMarker;
+    private View mView;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+        mView=(View) findViewById(R.id.f_view);
+
+
+
+
+        mView.setDrawingCacheEnabled(true);
+        mView.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
+                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+        mView.layout(0, 0, mView.getMeasuredWidth(), mView.getMeasuredHeight());
+        mView.buildDrawingCache(true);
         context=this;
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -157,15 +168,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 mMap = googleMap;
                 mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
-                LayoutInflater inflater = (LayoutInflater) context
-                        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                View v = inflater.inflate(R.layout.building_view, null);
-                Bitmap bm=loadBitmapFromView(v);
+                Bitmap b = Bitmap.createBitmap(mView.getDrawingCache());
+                mView.setDrawingCacheEnabled(false);
                 ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-                bm.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+                b.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+
                 //Bitmap bitmapImageLocal = BitmapFactory.decodeResource(R.layout.building_view);
 
-                mMap.addMarker(new MarkerOptions().position(address).icon(BitmapDescriptorFactory.fromBitmap(bm)));
+                mMap.addMarker(new MarkerOptions().position(address).icon(BitmapDescriptorFactory.fromBitmap(b)));
 
                // mMap.addCircle(new CircleOptions().)
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(address,100));

@@ -1,8 +1,23 @@
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<fragment
     xmlns:map="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/map"
     android:name="com.google.android.gms.maps.SupportMapFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.nandhinigovindasamy.mymapapplication.MapsActivity" />
+    tools:context="com.example.nandhinigovindasamy.mymapapplication.MapsActivity"
+
+
+    />
+    <include
+        android:id="@+id/f_view"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    layout="@layout/building_view"
+        android:visibility="invisible"
+    />
+</RelativeLayout>
