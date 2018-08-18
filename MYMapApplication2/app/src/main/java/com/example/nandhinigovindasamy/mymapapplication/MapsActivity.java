@@ -55,16 +55,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-        mView=(View) findViewById(R.id.f_view);
-
-
-
-
-        mView.setDrawingCacheEnabled(true);
-        mView.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
-                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
-        mView.layout(0, 0, mView.getMeasuredWidth(), mView.getMeasuredHeight());
-        mView.buildDrawingCache(true);
+//        mView=(View) findViewById(R.id.f_view);
+//
+//
+//
+//
+//        mView.setDrawingCacheEnabled(true);
+//        mView.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
+//                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+//        mView.layout(0, 0, mView.getMeasuredWidth(), mView.getMeasuredHeight());
+//        mView.buildDrawingCache(true);
         context=this;
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -168,16 +168,42 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 mMap = googleMap;
                 mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
+                //TODO: two icons in a single layout
+
+                /*Bitmap b = Bitmap.createBitmap(mView.getDrawingCache());
+                mView.setDrawingCacheEnabled(false);
+                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                b.compress(Bitmap.CompressFormat.JPEG, 100, bytes);*/
+
+                //Bitmap bitmapImageLocal = BitmapFactory.decodeResource(R.layout.building_view);
+
+                //TODO: two icons in a single layout
+
+               /* mMap.addMarker(new MarkerOptions().position(address).icon(BitmapDescriptorFactory.fromBitmap(b)));
+
+               // mMap.addCircle(new CircleOptions().)
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(address,100));*/
+
+
+               //TODO: two icons in a different layout
+
+                mView=(View) findViewById(R.id.f_view);
+                mView.setDrawingCacheEnabled(true);
+                mView.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
+                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+                mView.layout(0, 0, mView.getMeasuredWidth(), mView.getMeasuredHeight());
+                mView.buildDrawingCache(true);
+
+
                 Bitmap b = Bitmap.createBitmap(mView.getDrawingCache());
                 mView.setDrawingCacheEnabled(false);
                 ByteArrayOutputStream bytes = new ByteArrayOutputStream();
                 b.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
 
-                //Bitmap bitmapImageLocal = BitmapFactory.decodeResource(R.layout.building_view);
-
                 mMap.addMarker(new MarkerOptions().position(address).icon(BitmapDescriptorFactory.fromBitmap(b)));
+                mMap.addMarker(new MarkerOptions().position(address).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_man)).);
 
-               // mMap.addCircle(new CircleOptions().)
+                // mMap.addCircle(new CircleOptions().)
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(address,100));
 
             }

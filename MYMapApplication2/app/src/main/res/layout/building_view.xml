@@ -14,16 +14,16 @@
         android:src="@drawable/building_image"
         />
 
-    <ImageView
-        android:id="@+id/count"
-        android:layout_width="wrap_content"
+    <!--<ImageView-->
+        <!--android:id="@+id/count"-->
+        <!--android:layout_width="wrap_content"-->
 
-        android:layout_height="wrap_content"
+        <!--android:layout_height="wrap_content"-->
 
-        android:src="@drawable/ic_man"
+        <!--android:src="@drawable/ic_man"-->
 
-        android:gravity="center"
+        <!--android:gravity="center"-->
 
-        android:textSize="200sp" />
+        <!--android:textSize="200sp" />-->
 
 </FrameLayout>
